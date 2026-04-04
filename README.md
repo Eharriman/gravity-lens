@@ -1,1 +1,1 @@
-# This is a project for Gravitational Lensing Simulations
+# This is a project for Gravitational Lensing Simulations and related materials
