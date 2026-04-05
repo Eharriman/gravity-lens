@@ -14,6 +14,7 @@ G = 6.67e-8
 
 ly = 9.46e17 # in cm
 psc = 3.26 * ly
+kpsc = 1000 * psc
 
 
 # Earth
@@ -24,10 +25,5 @@ R_earth = 6.38e8
 # Sun
 M_sun = 1.99e33
 R_sun = 6.69e10
-
-
-#print(ly * 2)
-#print(c)
-#print(G)
 
 
