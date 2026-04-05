@@ -25,9 +25,10 @@ def generate_einstein_angle(mass, D_ls, D_s, D_l):
 
 
 
+'''
 test_mass = M_sun
 D_ls = D_s = D_l = 1e22
 
 print(generate_schwarzchildradius(test_mass))
 print(generate_einstein_angle(test_mass, D_ls, D_l, D_s))
-
+'''
