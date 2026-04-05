@@ -10,6 +10,3 @@ def image_positions(beta, einstein_angle):
 
     return theta_plus, theta_minus
 
-
-#beta_test = 1000
-#print(image_positions(beta_test, 1))
