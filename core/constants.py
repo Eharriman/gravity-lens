@@ -3,9 +3,11 @@
 from scipy import constants
 
 # Fundamental constants
-c = constants.c
-G = constants.G
-h_bar = constants.hbar
+#c = constants.c
+#G = constants.G
+c = 3e10
+G = 6.67e-8 
+#h_bar = constants.hbar
 
 
 # Distances
@@ -25,6 +27,7 @@ R_sun = 6.69e10
 
 
 #print(ly * 2)
-#print(psc)
+#print(c)
+#print(G)
 
 

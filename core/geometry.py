@@ -7,6 +7,5 @@ def generate_schwarzchildradius(mass):
     return (2 * G * mass) / (c**2)
 
 
-test_mass = (1e11) * M_sun
-
-print(generate_schwarzchildradius(test_mass))
+#test_mass = (1e11) * M_sun
+#print(generate_schwarzchildradius(test_mass))
