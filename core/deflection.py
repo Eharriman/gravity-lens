@@ -1,15 +1,20 @@
 import numpy as np
 
-def generated_pointLensDeflection(theta_vec, theta_einstein):
+def point_lens_deflection(theta_vec, theta_einstein):
 
-    norm_sqr = np.dot(theta_vec, theta_vec)
+    theta_vec = np.asarray(theta_vec, type=float)
 
-    return (theta_einstein ** 2 / norm_sqr) * theta_vec
+    r2 = np.dot(theta_vec, theta_vec)
+
+    if r2 == 0:
+        raise ValueError("Deflection undefined with θ == 0")
+    
+    return (theta_einstein ** 2 / r2) * theta_vec
 
 
 def map_theta_to_beta(theta_vec, theta_einstein):
     
-    alpha = generated_pointLensDeflection(theta_vec, theta_einstein)
+    alpha = point_lens_deflection(theta_vec, theta_einstein)
 
     beta = theta_vec - alpha
 
