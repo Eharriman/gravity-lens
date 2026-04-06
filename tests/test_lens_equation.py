@@ -1,5 +1,6 @@
 from core.lens_equation import image_positions
-from core.deflection import map_theta_to_beta
+from core.deflection import point_lens_deflection
+from core.lens_mapping import map_theta_to_beta
 import numpy as np
 
 theta_E = 1.0
