@@ -12,7 +12,7 @@ def source_field(beta_grid, source_list):
     for source in source_list:
         source_type = source["type"]
 
-        if source == "gaussian_source":
+        if source_type == "gaussian_source":
             total_field += gaussian_source(
                 beta_grid,
                 center=source.get("center", (0.0, 0.0)),
@@ -20,7 +20,7 @@ def source_field(beta_grid, source_list):
                 amplitude = source.get("amplitude", 1.0),
             )
         
-        elif source == "sersic_source":
+        elif source_type == "sersic_source":
             total_field += sersic_source(
                 beta_grid,
                 center=source.get("center", (0.0, 0.0)),

@@ -4,8 +4,25 @@ import random
 
 
 if __name__ == "__main__":
+    
+    source_list = [
+        {
+            "type": "gaussian_source",
+            "center": (0.6, 0.0),
+            "sigma": 0.08,
+            "amplitude": 1.0
+        },
+        {
+            "type": "sersic_source",
+            "center": (-1.2, -0.9),
+            "amplitude": 1.0,
+            "R_eff": 0.3,
+            "n_sersic": 1.2
+        }
+    ]
+    
+    
     theta_max = 2.0
-    theta_max = 3.4
     n = 500
     theta_einstein = 0.5
 
@@ -13,8 +30,7 @@ if __name__ == "__main__":
         theta_max=theta_max,
         n=n,
         theta_einstein=theta_einstein,
-        source_center=(0.4, 0.3),
-        source_sigma=0.08
+        source_list=source_list
     )
 
 
