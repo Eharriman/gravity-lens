@@ -19,3 +19,5 @@ def generate_theta_grid(theta_max, n):
 
     X, Y = np.meshgrid(x, y, indexing="xy")
     return np.stack((X,Y), axis=-1)
+
+#print(generate_theta_grid(1, 3))
