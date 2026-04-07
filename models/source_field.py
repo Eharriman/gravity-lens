@@ -1,24 +1,35 @@
 import numpy as np
 
-def gaussian_source(beta_grid, center=(0.6, 0.0), sigma=0.08, amplitude=1.0):
-    bx = beta_grid[..., 0]
-    by = beta_grid[..., 1]
-    cx, cy = center
+from models.source_objects import (
+    gaussian_source,
+    sersic_source
+)
 
-    r2 = (bx - cx)**2 + (by - cy)**2
-    return amplitude * np.exp(-r2 / (2 * sigma**2))
+def source_field(beta_grid, source_list):
 
+    total_field = np.zeros(beta_grid.shape[:-1], dtype=float)
 
-def sersic_source(beta_grid, center=(0.6, 0.0), amplitude=1.0, R_eff=0.2, n_sersic=1.0):
+    for source in source_list:
+        source_type = source["type"]
 
-    bx = beta_grid[..., 0]
-    by = beta_grid[..., 1]
-    cx, cy = center
-
-    r = np.sqrt((bx - cx)**2 + (by - cy)**2)
-    
-    bn = 1.9992 * n_sersic - 0.3271
-    
-    # 3. Sersic formula
-    exponent = -bn * ((r / R_eff)**(1 / n_sersic) - 1)
-    return amplitude * np.exp(exponent)
+        if source == "gaussian_source":
+            total_field += gaussian_source(
+                beta_grid,
+                center=source.get("center", (0.0, 0.0)),
+                sigma= source.get("sigma", 0.1),
+                amplitude = source.get("amplitude", 1.0),
+            )
+        
+        elif source == "sersic_source":
+            total_field += sersic_source(
+                beta_grid,
+                center=source.get("center", (0.0, 0.0)),
+                amplitude = source.get("amplitude", 1.0),
+                R_eff = source.get("R_eff", 0.2),
+                n_sersic = source.get("n_sersic", 1.0)
+            )
+        
+        else:
+            raise ValueError(f"Source object {source_type} is not in object catalogue source_objects.py")
+        
+    return total_field
