@@ -4,6 +4,7 @@ import random
 
 
 if __name__ == "__main__":
+
     
     source_list = [
         {
@@ -12,7 +13,7 @@ if __name__ == "__main__":
             "sigma": 0.1,
             "amplitude": 50
         },
-                {
+        {
             "type": "gaussian_elliptical",
             "center": (0.7, -0.6),
             "sigma_major": 0.15,
@@ -29,10 +30,21 @@ if __name__ == "__main__":
         }
     ]
     
+    # Use this example for explicit Einstein ring demonstration
+    '''
+    source_list = [
+        {
+            "type": "gaussian_circular",
+            "center": (0.0, 0.0),
+            "sigma": 0.1,
+            "amplitude": 50
+        }
+    ]
+    '''
     
     theta_max = 2.0
     n = 500
-    theta_einstein = 0.5
+    theta_einstein = 0.7
 
     _, _, unlensed_image, lensed_image = generate_lensed_field(
         theta_max=theta_max,
