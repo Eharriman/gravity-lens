@@ -16,6 +16,13 @@ def gaussian_source(beta_grid, center=(0.6, 0.0), sigma=0.08, amplitude=1.0):
 
 
 def sersic_source(beta_grid, center=(0.6, 0.0), amplitude=1.0, R_eff=0.2, n_sersic=1.0):
+    '''
+    Sersic shape which produces a pretty cute model of a distance circular galaxy.
+    center: center of shape
+    amplitude: brightness
+    R_eff: effective radius (1/2 total light contained within this radius)
+    n_sersic: Sersic index -- controls shape
+    '''
 
     bx = beta_grid[..., 0]
     by = beta_grid[..., 1]
