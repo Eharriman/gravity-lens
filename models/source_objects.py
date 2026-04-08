@@ -15,6 +15,36 @@ def gaussian_circular(beta_grid, center=(0.6, 0.0), sigma=0.08, amplitude=1.0):
     return amplitude * np.exp(-r2 / (2 * sigma**2))
 
 
+def gaussian_elliptical(
+    beta_grid,
+    center=(0.0, 0.0),
+    sigma_major=0.15,
+    sigma_minor=0.08,
+    angle=0.0,
+    amplitude=1.0
+):
+
+    bx = beta_grid[..., 0]
+    by = beta_grid[..., 1]
+    cx, cy = center
+
+    x = bx - cx
+    y = by - cy
+
+    cos_a = np.cos(angle)
+    sin_a = np.sin(angle)
+
+    x_rot = cos_a * x + sin_a * y
+    y_rot = -sin_a * x + cos_a * y
+
+    exponent = (
+        (x_rot**2) / (2 * sigma_major**2)
+        + (y_rot**2) / (2 * sigma_minor**2)
+    )
+
+    return amplitude * np.exp(-exponent)
+
+
 def sersic_source(beta_grid, center=(0.6, 0.0), amplitude=1.0, R_eff=0.2, n_sersic=1.0):
     '''
     Sersic shape which produces a pretty cute model of a distance circular galaxy.

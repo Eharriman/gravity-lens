@@ -10,13 +10,21 @@ if __name__ == "__main__":
             "type": "gaussian_circular",
             "center": (0.6, 0.4),
             "sigma": 0.1,
-            "amplitude": 4.4
+            "amplitude": 50
+        },
+                {
+            "type": "gaussian_elliptical",
+            "center": (0.7, -0.6),
+            "sigma_major": 0.15,
+            "sigma_minor": 0.07,
+            "angle": 0.5,
+            "amplitude": 100,
         },
         {
             "type": "sersic_source",
             "center": (-0.4, -0.3),
-            "amplitude": 1.0,
-            "R_eff": 0.3,
+            "amplitude": 3.2,
+            "R_eff": 1.4,
             "n_sersic": 1.9
         }
     ]
@@ -32,7 +40,6 @@ if __name__ == "__main__":
         theta_einstein=theta_einstein,
         source_list=source_list
     )
-
 
 
     plot_lensed_comparison(unlensed_image, lensed_image, theta_max)
