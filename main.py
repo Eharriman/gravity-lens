@@ -7,17 +7,17 @@ if __name__ == "__main__":
     
     source_list = [
         {
-            "type": "gaussian_source",
-            "center": (0.6, 0.0),
-            "sigma": 0.08,
-            "amplitude": 1.0
+            "type": "gaussian_circular",
+            "center": (0.6, 0.4),
+            "sigma": 0.1,
+            "amplitude": 4.4
         },
         {
             "type": "sersic_source",
-            "center": (-1.2, -0.9),
+            "center": (-0.4, -0.3),
             "amplitude": 1.0,
             "R_eff": 0.3,
-            "n_sersic": 1.2
+            "n_sersic": 1.9
         }
     ]
     

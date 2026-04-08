@@ -1,7 +1,7 @@
 import numpy as np
 
 from models.source_objects import (
-    gaussian_source,
+    gaussian_circular,
     sersic_source
 )
 
@@ -12,8 +12,8 @@ def source_field(beta_grid, source_list):
     for source in source_list:
         source_type = source["type"]
 
-        if source_type == "gaussian_source":
-            total_field += gaussian_source(
+        if source_type == "gaussian_circular":
+            total_field += gaussian_circular(
                 beta_grid,
                 center=source.get("center", (0.0, 0.0)),
                 sigma= source.get("sigma", 0.1),
