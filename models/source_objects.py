@@ -1,6 +1,12 @@
 import numpy as np
 
 def gaussian_source(beta_grid, center=(0.6, 0.0), sigma=0.08, amplitude=1.0):
+    '''
+    This is your basic amorphous blob. The parameters are the standard for a Gaussian distribution:
+    center: tuple indicating the center of the "blob" in the x,y plane
+    sigma: the std. deviation. A large sigma produces a blurry/fuzzy shape, whereas a small sigma a sharper picture
+    amplitude: the brightness at the center of the galaxy
+    '''
     bx = beta_grid[..., 0]
     by = beta_grid[..., 1]
     cx, cy = center
