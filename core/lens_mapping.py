@@ -2,6 +2,12 @@ import numpy as np
 from core.deflection import point_lens_deflection
 
 def map_theta_to_beta(theta_vec, theta_einstein):
+    '''
+    Method is used to return the source image vector from a given observation angular vector and Einstein Angle.
+    A theta vector, the observed location of the image, is provided along with the Einstein angle. 
+    The angle of deflection is determeined using the point_lens_deflection method.
+    The beta vector is the difference between the theta vector and the deflection angle
+    '''
 
     theta_vec = np.asarray(theta_vec, dtype=float)
     
