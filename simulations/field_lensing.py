@@ -14,4 +14,3 @@ def generate_lensed_field(theta_max, n, theta_einstein,
 
     return theta_grid, beta_grid, unlensed_image, lensed_image
 
-

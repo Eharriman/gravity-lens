@@ -12,14 +12,4 @@ def point_lens_deflection(theta_vec, theta_einstein):
     
     return (theta_einstein ** 2 / r2) * theta_vec
 
-'''
-# Moved this method to lens_mapping.py
 
-def map_theta_to_beta(theta_vec, theta_einstein):
-    
-    alpha = point_lens_deflection(theta_vec, theta_einstein)
-
-    beta = theta_vec - alpha
-
-    return beta
-'''

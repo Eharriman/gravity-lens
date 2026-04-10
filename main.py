@@ -44,7 +44,7 @@ if __name__ == "__main__":
     
     theta_max = 2.0
     n = 500
-    theta_einstein = 0.7
+    theta_einstein = 0.5
 
     _, _, unlensed_image, lensed_image = generate_lensed_field(
         theta_max=theta_max,

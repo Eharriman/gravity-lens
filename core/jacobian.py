@@ -26,3 +26,15 @@ def point_lens_jacobian(theta_vec, theta_einstein):
     jac[..., 1, 1] = a22
 
     return jac
+
+'''
+For a theta = [2,3] and theta_E = 1/3 the Jacobian matrix should be:
+
+A_11 = 0.970414201183
+A_12 = A_21 = 0.0710059171598
+A_22
+'''
+#theta_vec = np.array([2,3])
+#theta_E = (1/3)
+#jac = point_lens_jacobian(theta_vec, theta_E)
+#print(jac)
