@@ -39,13 +39,16 @@ def point_lens_det_jacobian(theta_vec, theta_einstein):
 
     return det     
 
-def point_lens_magnfication_field(determinant):
+def point_lens_magnfication_field(theta_vec, theta_einstein):
     '''
     The overall increase in the size of a lensed source is given by the inverse of the determinant of the Jacobian
 
     mu = 1/|det A|
     '''
-    pass
+
+    det = point_lens_det_jacobian(theta_vec, theta_einstein)
+    eps = 1e-12
+    return 1.0 / np.maximum(np.absolute(det), eps)
 
 '''
 For a theta = [2,3] and theta_E = 1/3 the Jacobian matrix should be:
