@@ -50,6 +50,24 @@ def point_lens_magnfication_field(theta_vec, theta_einstein):
     eps = 1e-12
     return 1.0 / np.maximum(np.absolute(det), eps)
 
+
+def point_lens_eigenvalues(theta_vec, theta_einstein):
+    """
+    Calculates the radial and tangential eigenvalues of the transformation matrix.
+    """
+    theta_vec = np.asarray(theta_vec, dtype=float)
+    r2 = np.sum(theta_vec**2, axis=-1)
+    eps = 1e-12
+    r2 = np.maximum(r2, eps)
+
+    te2 = theta_einstein**2
+
+    lambda_r = 1 + te2 / r2
+    lambda_t = 1 - te2 / r2
+
+    return lambda_r, lambda_t
+
+
 '''
 For a theta = [2,3] and theta_E = 1/3 the Jacobian matrix should be:
 
