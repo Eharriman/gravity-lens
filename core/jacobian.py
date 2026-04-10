@@ -30,24 +30,21 @@ def point_lens_jacobian(theta_vec, theta_einstein):
 
 def point_lens_det_jacobian(theta_vec, theta_einstein):
 
-    #print("trace here 1")
     jac = point_lens_jacobian(theta_vec, theta_einstein)
-    #print("trace here 2")
-    #print(jac)
-    #print("trace here 3")
     det = jac[...,0,0]*jac[...,1,1] - jac[...,1,0]*jac[...,0,1]
 
     return det     
 
-def point_lens_magnfication_field(theta_vec, theta_einstein):
+
+def point_lens_magnification_field(theta_vec, theta_einstein):
     '''
     The overall increase in the size of a lensed source is given by the inverse of the determinant of the Jacobian
 
     mu = 1/|det A|
     '''
-
     det = point_lens_det_jacobian(theta_vec, theta_einstein)
     eps = 1e-12
+
     return 1.0 / np.maximum(np.absolute(det), eps)
 
 
