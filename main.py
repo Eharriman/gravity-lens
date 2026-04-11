@@ -108,7 +108,7 @@ if __name__ == "__main__":
         run_image_sim(
             image_filename="el_gordo_james_webb.png",
             theta_max=25,
-            theta_einstein=0.35,
+            theta_einstein=2,
             grayscale=False,
         )
     

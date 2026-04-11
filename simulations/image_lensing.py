@@ -18,8 +18,8 @@ def lens_image(image, theta_max, theta_einstein):
     beta_x = beta_grid[..., 0]
     beta_y = beta_grid[..., 1]
 
-    beta_x_norm = (beta_x + theta_einstein) / (2 * theta_max)
-    beta_y_norm = (beta_y + theta_einstein) / (2 * theta_max)
+    beta_x_norm = (beta_x + theta_max) / (2 * theta_max)
+    beta_y_norm = (beta_y + theta_max) / (2 * theta_max)
 
     
     px = (beta_x_norm * (n_x - 1)).astype(int)
