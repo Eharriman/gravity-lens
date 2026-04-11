@@ -94,6 +94,7 @@ def run_image_sim(
 if __name__ == "__main__":
     
     SIM_MODE = "image"
+    #SIM_MODE = "source_list"
 
     if SIM_MODE == "source_list":
             run_source_list_sim(
@@ -108,7 +109,7 @@ if __name__ == "__main__":
         run_image_sim(
             image_filename="el_gordo_james_webb.png",
             theta_max=25,
-            theta_einstein=2,
+            theta_einstein=20,
             grayscale=False,
         )
     
