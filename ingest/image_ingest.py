@@ -15,3 +15,9 @@ def load_image(path, grayscale=True, normalize=True):
         img_arr /= img_arr.max()
 
     return img_arr
+
+
+def show_image(img):
+    plt.imshow(img, cmap="gray")
+    plt.axis("off")
+    plt.show()

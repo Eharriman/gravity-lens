@@ -103,7 +103,3 @@ if __name__ == "__main__":
         theta_max
     )
     '''
-
-
-
-    #plot_lensed_comparison(unlensed_image, lensed_image, theta_max)
