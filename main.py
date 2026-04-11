@@ -1,11 +1,10 @@
 from simulations.field_lensing import generate_lensed_field
-from render.field_render import plot_lensed_comparison
+from render.field_render import plot_lensed_comparison, plot_magnification_and_det
 import random
 
 
 if __name__ == "__main__":
 
-    
     source_list = [
         {
             "type": "gaussian_circular",
@@ -35,23 +34,37 @@ if __name__ == "__main__":
     source_list = [
         {
             "type": "gaussian_circular",
-            "center": (0.0, 0.0),
-            "sigma": 0.1,
-            "amplitude": 50
+            "center": (0.6, 0.0),
+            "sigma": 0.08,
+            "amplitude": 1
         }
     ]
     '''
     
     theta_max = 2.0
     n = 500
-    theta_einstein = 0.5
+    theta_einstein = 0.4
 
-    _, _, unlensed_image, lensed_image = generate_lensed_field(
+    result = generate_lensed_field(
         theta_max=theta_max,
         n=n,
         theta_einstein=theta_einstein,
         source_list=source_list
     )
 
+    plot_lensed_comparison(
+        result["unlensed_image"],
+        result["lensed_image"],
+        theta_max
+    )
+    '''
+    plot_magnification_and_det(
+        result["magnification"],
+        result["det_jacobian"],
+        theta_max
+    )
+    '''
 
-    plot_lensed_comparison(unlensed_image, lensed_image, theta_max)
+
+
+    #plot_lensed_comparison(unlensed_image, lensed_image, theta_max)
