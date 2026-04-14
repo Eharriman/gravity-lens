@@ -5,8 +5,10 @@ import matplotlib as plt
 OUTPUT_DIR = Path("output")
 
 def generate_filename(prefix="lens", ext="png", tag=None):
-    timestamp = datetime.now()
+    #timestamp = datetime.now()
 
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    
     if tag:
         return f"{prefix}_{tag}_{timestamp}.{ext}"
     return f"{prefix}_{timestamp}.{ext}"

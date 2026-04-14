@@ -88,7 +88,7 @@ def run_image_sim(
         theta_einstein=theta_einstein,
     )
 
-    plot_image_comparison(image, lensed)
+    plot_image_comparison(image, lensed, save=True, tag="el-gordo-image")
 
 
 if __name__ == "__main__":
