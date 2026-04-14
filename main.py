@@ -48,7 +48,7 @@ def generate_demo_sourcelist():
     ]
 
 
-def run_source_list_sim(theta_max=2.0, n=500, theta_einstein=0.6, show_jacobian=False):
+def run_source_list_sim(theta_max=2.0, n=500, theta_einstein=0.6, show_jacobian=False, save=False, tag=None):
 
     source_list =  generate_demo_sourcelist()
 
@@ -63,6 +63,8 @@ def run_source_list_sim(theta_max=2.0, n=500, theta_einstein=0.6, show_jacobian=
         result["unlensed_image"],
         result["lensed_image"],
         theta_max,
+        save,
+        tag
     )
 
     if show_jacobian:
@@ -95,8 +97,8 @@ def run_image_sim(
 
 if __name__ == "__main__":
     
-    SIM_MODE = "image"
-    #SIM_MODE = "source_list"
+    #SIM_MODE = "image"
+    SIM_MODE = "source_list"
 
     if SIM_MODE == "source_list":
             run_source_list_sim(
@@ -104,6 +106,8 @@ if __name__ == "__main__":
             n=500,
             theta_einstein=0.6,
             show_jacobian=False,
+            save=True,
+            tag="test-tag"
         )
     
     
