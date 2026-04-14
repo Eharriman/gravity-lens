@@ -78,6 +78,8 @@ def run_image_sim(
     theta_max=2.0,
     theta_einstein=0.35,
     grayscale=False,
+    save=False, 
+    tag=None
 ):
     image_path = ASSETS_DIR / image_filename
     image = load_image(image_path, grayscale=grayscale)
@@ -88,7 +90,7 @@ def run_image_sim(
         theta_einstein=theta_einstein,
     )
 
-    plot_image_comparison(image, lensed, save=True, tag="el-gordo-image")
+    plot_image_comparison(image, lensed, save, tag)
 
 
 if __name__ == "__main__":
@@ -111,6 +113,8 @@ if __name__ == "__main__":
             theta_max=25,
             theta_einstein=20,
             grayscale=False,
+            save=True, 
+            tag="el-gordo-image"
         )
     
     
