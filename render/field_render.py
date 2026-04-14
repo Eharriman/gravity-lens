@@ -1,7 +1,9 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-def plot_lensed_comparison(unlensed_image, lensed_image, theta_max):
+from utils.io_utils import save_figure
+
+def plot_lensed_comparison(unlensed_image, lensed_image, theta_max, save=False, tag=None):
     extent = [-theta_max, theta_max, -theta_max, theta_max]
 
     fig, axes = plt.subplots(1, 2, figsize=(10, 4))
@@ -15,6 +17,9 @@ def plot_lensed_comparison(unlensed_image, lensed_image, theta_max):
     axes[1].set_title("Lensed Image")
     axes[1].set_xlabel(r"Angular displacement: $\theta_x$")
     axes[1].set_ylabel(r"Angular displacement: $\theta_y$")
+
+    if save:
+        save_figure(fig, prefix="field_lens", tag=tag)
 
     plt.tight_layout()
     plt.show()
