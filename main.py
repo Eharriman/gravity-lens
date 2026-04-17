@@ -4,6 +4,7 @@ from render.field_render import plot_lensed_comparison, plot_magnification_and_d
 
 from ingest.image_ingest import load_image
 from simulations.image_lensing import lens_image
+from simulations.image_lensing_interp import lens_image_interp
 from render.image_render import plot_image_comparison
 
 ROOT = Path(__file__).resolve().parent
@@ -80,25 +81,35 @@ def run_image_sim(
     theta_max=2.0,
     theta_einstein=0.35,
     grayscale=False,
+    interpolation_mode = "nearest",
     save=False, 
     tag=None
 ):
     image_path = ASSETS_DIR / image_filename
     image = load_image(image_path, grayscale=grayscale)
 
-    lensed = lens_image(
-        image=image,
-        theta_max=theta_max,
-        theta_einstein=theta_einstein,
-    )
+    if interpolation_mode == "nearest":
+        lensed = lens_image(
+            image=image,
+            theta_max=theta_max,
+            theta_einstein=theta_einstein,
+        )
+    elif interpolation_mode == "bilinear":
+         lensed = lens_image_interp(image=image,
+            theta_max=theta_max,
+            theta_einstein=theta_einstein,
+            )
+    else:
+         raise ValueError(f"Invalid interpolation_mode: {interpolation_mode}")
+
 
     plot_image_comparison(image, lensed, save, tag)
 
 
 if __name__ == "__main__":
     
-    #SIM_MODE = "image"
-    SIM_MODE = "source_list"
+    SIM_MODE = "image"
+    #SIM_MODE = "source_list"
 
     if SIM_MODE == "source_list":
             run_source_list_sim(
@@ -115,8 +126,9 @@ if __name__ == "__main__":
         run_image_sim(
             image_filename="el_gordo_james_webb.png",
             theta_max=25,
-            theta_einstein=20,
+            theta_einstein=15,
             grayscale=False,
+            interpolation_mode="bilinear",
             save=True, 
             tag="el-gordo-image"
         )
