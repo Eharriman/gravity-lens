@@ -98,6 +98,7 @@ def run_image_sim(
          lensed = lens_image_interp(image=image,
             theta_max=theta_max,
             theta_einstein=theta_einstein,
+            mask_radius=0.1
             )
     else:
          raise ValueError(f"Invalid interpolation_mode: {interpolation_mode}")
@@ -124,9 +125,9 @@ if __name__ == "__main__":
     
     elif SIM_MODE == "image":
         run_image_sim(
-            image_filename="el_gordo_james_webb.png",
+            image_filename="MACS_J1149.5+2223.png",
             theta_max=25,
-            theta_einstein=15,
+            theta_einstein=3,
             grayscale=False,
             interpolation_mode="bilinear",
             save=True, 
