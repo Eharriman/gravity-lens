@@ -9,7 +9,7 @@ def generate_theta_grid_rect(theta_max, n_x, n_y):
     return np.stack((X, Y), axis=-1)
 
 
-def lens_image_interp(image, theta_max, theta_einstein, fill_value=0.0):
+def lens_image_interp(image, theta_max, theta_einstein, fill_value=0.0, mask_radius=None):
 
     image = np.asarray(image)
 
@@ -30,5 +30,18 @@ def lens_image_interp(image, theta_max, theta_einstein, fill_value=0.0):
     py = (beta_y + theta_max) / (2.0 * theta_max) * (n_y - 1)
 
     lensed = sample_bilinear(image, px, py, fill_value=fill_value)
+
+    if mask_radius is not None and mask_radius > 0:
+        theta_x = theta_grid[..., 0]
+        theta_y = theta_grid[..., 1]
+
+        r2 = theta_x**2 + theta_y**2
+
+        mask = r2 < (mask_radius**2)
+
+        if image.ndim == 2:
+            lensed[mask] = fill_value
+        if image.ndim == 3:
+            lensed[mask] = fill_value
 
     return lensed
