@@ -7,6 +7,9 @@ from simulations.image_lensing import lens_image
 from simulations.image_lensing_interp import lens_image_interp
 from render.image_render import plot_image_comparison
 
+from configs.simulation_config import AppConfig, ASSETS_DIR
+from configs.demo_scenes import build_demo_source_list
+
 ROOT = Path(__file__).resolve().parent
 ASSETS_DIR = ROOT / "assets"
 
@@ -48,7 +51,7 @@ def generate_demo_sourcelist():
     {"type": "sersic_source", "center": (-1.4, -1.3), "R_eff": 0.12, "n_sersic": 1.3, "amplitude": 0.9}
     ]
 
-
+'''
 def run_source_list_sim(theta_max=2.0, n=500, theta_einstein=0.6, show_jacobian=False, save=False, tag=None):
 
     source_list =  generate_demo_sourcelist()
@@ -74,7 +77,30 @@ def run_source_list_sim(theta_max=2.0, n=500, theta_einstein=0.6, show_jacobian=
             result["det_jacobian"],
             theta_max,
         )
+'''
 
+def run_source_list_sim(config):
+    source_list = build_demo_source_list()
+
+    result = generate_lensed_field(
+        theta_max=config.theta_max,
+        n=config.n,
+        theta_einstein=config.theta_einstein,
+        source_list=source_list,
+    )
+
+    plot_lensed_comparison(
+        result["unlensed_image"],
+        result["lensed_image"],
+        config.theta_max,
+    )
+
+    if config.show_jacobian:
+        plot_magnification_and_det(
+            result["magnification"],
+            result["det_jacobian"],
+            config.theta_max,
+        )
 
 def run_image_sim(
     image_filename="el_gordo_james_webb.png",

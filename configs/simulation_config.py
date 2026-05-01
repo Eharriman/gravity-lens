@@ -15,3 +15,25 @@ class SourceListConfig:
     theta_einstein: float = 0.6
     show_jacobian: bool = False
     save_output: bool = False
+
+
+@dataclass
+class ImageLensingConfig:
+    image_filename: str = "el_gordo_webb.png"
+    theta_max: float = 2.0
+    theta_einstein: float = 0.35
+    grayscale: bool = False
+
+    interpolation_mode: str = "bilinear"  # "nearest" or "bilinear"
+    fill_value: float = 0.0
+    mask_radius: float | None = 0.08
+
+    save_output: bool = False
+
+
+@dataclass
+class AppConfig:
+    simulation_mode: str = "source_list"  # "source_list" or "image"
+
+    source_list: SourceListConfig = SourceListConfig()
+    image_lensing: ImageLensingConfig = ImageLensingConfig()
