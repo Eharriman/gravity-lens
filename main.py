@@ -103,73 +103,43 @@ def run_source_list_sim(config):
         )
 
 
-def run_image_sim(
-    image_filename="el_gordo_james_webb.png",
-    theta_max=2.0,
-    theta_einstein=0.35,
-    grayscale=False,
-    interpolation_mode = "nearest",
-    save=False, 
-    tag=None
-):
-    image_path = ASSETS_DIR / image_filename
-    image = load_image(image_path, grayscale=grayscale)
+def run_image_sim(config):
+    image_path = ASSETS_DIR / config.image_filename
+    image = load_image(image_path, grayscale=config.grayscale)
 
-    if interpolation_mode == "nearest":
+    if config.interpolation_mode == "nearest":
         lensed = lens_image(
             image=image,
-            theta_max=theta_max,
-            theta_einstein=theta_einstein,
+            theta_max=config.theta_max,
+            theta_einstein=config.theta_einstein,
         )
-    elif interpolation_mode == "bilinear":
-         lensed = lens_image_interp(image=image,
-            theta_max=theta_max,
-            theta_einstein=theta_einstein,
-            mask_radius=0.1
-            )
+
+    elif config.interpolation_mode == "bilinear":
+        lensed = lens_image_interp(
+            image=image,
+            theta_max=config.theta_max,
+            theta_einstein=config.theta_einstein,
+            fill_value=config.fill_value,
+            mask_radius=config.mask_radius,
+        )
+
     else:
-         raise ValueError(f"Invalid interpolation_mode: {interpolation_mode}")
+        raise ValueError(f"Unknown interpolation mode: {config.interpolation_mode}")
 
 
-    plot_image_comparison(image, lensed, save, tag)
+    plot_image_comparison(image, lensed, config.save_output, config.tag)
 
 
 if __name__ == "__main__":
     
     app_config = AppConfig()
 
-    app_config.simulation_mode = "source_list"
+    #app_config.simulation_mode = "source_list"
+    app_config.simulation_mode = "image"
 
     if app_config.simulation_mode == "source_list":
          run_source_list_sim(app_config.source_list)
-    
-    #SIM_MODE = "image"
-    #SIM_MODE = "source_list"
-
-    '''
-    if SIM_MODE == "source_list":
-            run_source_list_sim(
-            theta_max=2.0,
-            n=500,
-            theta_einstein=0.6,
-            show_jacobian=False,
-            save=True,
-            tag="test-tag"
-        )
-    
-    
-    elif SIM_MODE == "image":
-        run_image_sim(
-            image_filename="MACS_J1149.5+2223.png",
-            theta_max=25,
-            theta_einstein=3,
-            grayscale=False,
-            interpolation_mode="bilinear",
-            save=True, 
-            tag="el-gordo-image"
-        )
-    '''
-    
-    
-    #else:
-    #     raise ValueError(f"Invalid simulation mode: {SIM_MODE}")
+    elif app_config.simulation_mode == "image":
+        run_image_sim(app_config.image_lensing)
+    else:
+        raise ValueError(f"Unknown simulation mode: {app_config.simulation_mode}")
