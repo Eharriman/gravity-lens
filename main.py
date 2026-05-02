@@ -102,6 +102,7 @@ def run_source_list_sim(config):
             config.theta_max,
         )
 
+
 def run_image_sim(
     image_filename="el_gordo_james_webb.png",
     theta_max=2.0,
@@ -135,9 +136,17 @@ def run_image_sim(
 
 if __name__ == "__main__":
     
-    SIM_MODE = "image"
+    app_config = AppConfig()
+
+    app_config.simulation_mode = "source_list"
+
+    if app_config.simulation_mode == "source_list":
+         run_source_list_sim(app_config.source_list)
+    
+    #SIM_MODE = "image"
     #SIM_MODE = "source_list"
 
+    '''
     if SIM_MODE == "source_list":
             run_source_list_sim(
             theta_max=2.0,
@@ -159,7 +168,8 @@ if __name__ == "__main__":
             save=True, 
             tag="el-gordo-image"
         )
+    '''
     
     
-    else:
-         raise ValueError(f"Invalid simulation mode: {SIM_MODE}")
+    #else:
+    #     raise ValueError(f"Invalid simulation mode: {SIM_MODE}")
