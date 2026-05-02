@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from pathlib import Path
-
+from typing import Optional
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 ASSETS_DIR = PROJECT_ROOT / "assets"
@@ -26,7 +26,7 @@ class ImageLensingConfig:
 
     interpolation_mode: str = "bilinear"  # "nearest" or "bilinear"
     fill_value: float = 0.0
-    mask_radius: float | None = 0.08
+    mask_radius: Optional[float] = 0.08
 
     save_output: bool = False
 
