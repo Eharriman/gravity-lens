@@ -19,7 +19,7 @@ class SourceListConfig:
 
 @dataclass
 class ImageLensingConfig:
-    image_filename: str = "el_gordo_webb.png"
+    image_filename: str = "el_gordo_james_webb.png"
     theta_max: float = 2.0
     theta_einstein: float = 0.35
     grayscale: bool = False
@@ -29,6 +29,7 @@ class ImageLensingConfig:
     mask_radius: Optional[float] = 0.08
 
     save_output: bool = False
+    tag: str = None
 
 
 @dataclass
