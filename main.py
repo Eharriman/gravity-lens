@@ -8,7 +8,7 @@ from simulations.image_lensing_interp import lens_image_interp
 from render.image_render import plot_image_comparison
 
 from configs.simulation_config import AppConfig, ASSETS_DIR
-from configs.demo_scenes import build_demo_source_list
+from configs.demo_scenes import build_demo_source_list, get_demo_scene
 
 ROOT = Path(__file__).resolve().parent
 ASSETS_DIR = ROOT / "assets"
@@ -51,36 +51,10 @@ def generate_demo_sourcelist():
     {"type": "sersic_source", "center": (-1.4, -1.3), "R_eff": 0.12, "n_sersic": 1.3, "amplitude": 0.9}
     ]
 
-'''
-def run_source_list_sim(theta_max=2.0, n=500, theta_einstein=0.6, show_jacobian=False, save=False, tag=None):
-
-    source_list =  generate_demo_sourcelist()
-
-    result = generate_lensed_field(
-        theta_max=theta_max,
-        n=n,
-        theta_einstein=theta_einstein,
-        source_list=source_list,
-    )
-
-    plot_lensed_comparison(
-        result["unlensed_image"],
-        result["lensed_image"],
-        theta_max,
-        save,
-        tag
-    )
-
-    if show_jacobian:
-        plot_magnification_and_det(
-            result["magnification"],
-            result["det_jacobian"],
-            theta_max,
-        )
-'''
 
 def run_source_list_sim(config):
-    source_list = build_demo_source_list()
+    #source_list = build_demo_source_list()
+    source_list = get_demo_scene(config.scene_name)
 
     result = generate_lensed_field(
         theta_max=config.theta_max,
@@ -134,8 +108,10 @@ if __name__ == "__main__":
     
     app_config = AppConfig()
 
-    #app_config.simulation_mode = "source_list"
-    app_config.simulation_mode = "image"
+    app_config.simulation_mode = "source_list"
+    #app_config.simulation_mode = "image"
+
+    app_config.source_list.scene_name = "einstein_ring"
 
     if app_config.simulation_mode == "source_list":
          run_source_list_sim(app_config.source_list)
