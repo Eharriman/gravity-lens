@@ -31,3 +31,26 @@ def build_simple_source_list():
             "n_sersic": 1.2,
         },
     ]
+
+def build_einstein_ring_source():
+    return [
+        {
+           "type": "gaussian_circular",
+            "center": (0.0, 0.0),
+            "sigma": 0.08,
+            "amplitude": 1.0, 
+        }
+    ]
+
+
+def get_demo_scene(scene_name):
+    
+    scenes = {
+        "simple": build_simple_source_list,
+        "einstein_ring": build_einstein_ring_source
+    }
+
+    if scene_name not in scenes:
+        raise ValueError(f"Unknown scene selection: {scene_name}")
+    
+    return scenes[scene_name]()
