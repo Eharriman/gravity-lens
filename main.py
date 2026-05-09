@@ -108,10 +108,13 @@ if __name__ == "__main__":
     
     app_config = AppConfig()
 
-    app_config.simulation_mode = "source_list"
-    #app_config.simulation_mode = "image"
+    #app_config.simulation_mode = "source_list"
+    app_config.simulation_mode = "image"
 
-    app_config.source_list.scene_name = "einstein_ring"
+    #app_config.source_list.scene_name = "einstein_ring"
+    app_config.source_list.scene_name = "simple"
+    app_config.image_lensing.image_filename = "el_gordo_james_webb.png"
+    app_config.image_lensing.theta_einstein = 0.9
 
     if app_config.simulation_mode == "source_list":
          run_source_list_sim(app_config.source_list)
