@@ -27,6 +27,15 @@ def parse_args():
     parser.add_argument("--scene", choice=["simple","einstein_ring"], default=None)
 
     #pass
+    return parser.parse_args()
+
+
+def apply_parse_config(config, args):
+    
+    if args.mode is not None:
+        config.simulation_mode = args.mode
+
+    return config
 
 def generate_demo_sourcelist():
     return [
