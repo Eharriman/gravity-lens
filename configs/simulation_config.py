@@ -13,6 +13,7 @@ class SourceListConfig:
     theta_max: float = 2.0
     n: int = 500
     theta_einstein: float = 0.6
+    scene_name: str = "simple"
     show_jacobian: bool = False
     save_output: bool = False
 
