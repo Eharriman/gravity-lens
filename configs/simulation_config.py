@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Optional
 
@@ -37,5 +37,5 @@ class ImageLensingConfig:
 class AppConfig:
     simulation_mode: str = "source_list"  # "source_list" or "image"
 
-    source_list: SourceListConfig = SourceListConfig()
-    image_lensing: ImageLensingConfig = ImageLensingConfig()
+    source_list: SourceListConfig = field(default_factory=SourceListConfig)
+    image_lensing: ImageLensingConfig = field(default_factory=ImageLensingConfig)
