@@ -20,7 +20,13 @@ def parse_args():
     
     parser = argparse.ArgumentParser(description="Gravity-Lens Sim")
 
-    pass
+    # Mode config
+    parser.add_argument("--mode", choices=["source_list", "image"], default=None)
+
+    # Source list mode
+    parser.add_argument("--scene", choice=["simple","einstein_ring"], default=None)
+
+    #pass
 
 def generate_demo_sourcelist():
     return [
