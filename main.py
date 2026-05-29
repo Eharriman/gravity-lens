@@ -25,7 +25,20 @@ def parse_args():
 
     # Source list mode
     parser.add_argument("--scene", choices=["simple","einstein_ring"], default=None)
+    parser.add_argument("--n", type=int, default=None)
 
+    # Image mode
+    parser.add_argument("--image", type=str, default=None)
+    parser.add_argument("--interp" choices=["nearest", "bilinear"], default=None)
+    parser.add_argument("--grayscale", action="store_true")
+    parser.add_argument("--mask-radius", type=float, default=None)
+
+    # Additional
+    parser.add_argument("--theta-max", type=float, default=None)
+    parser.add_argument("--theta-einstein", type=float, default=None)
+    parser.add_argument("--show-jacobian", action="store_true")
+
+    
     #pass
     return parser.parse_args()
 
@@ -140,6 +153,10 @@ if __name__ == "__main__":
     #app_config.source_list.scene_name = "simple"
     #app_config.image_lensing.image_filename = "el_gordo_james_webb.png"
     #app_config.image_lensing.theta_einstein = 0.9
+
+    '''
+    Running: python .\main.py --mode source_list --scene simple    
+    '''
 
     if app_config.simulation_mode == "source_list":
          run_source_list_sim(app_config.source_list)
