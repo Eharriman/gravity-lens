@@ -1,3 +1,5 @@
+import argparse
+
 from pathlib import Path
 from simulations.field_lensing import generate_lensed_field
 from render.field_render import plot_lensed_comparison, plot_magnification_and_det
@@ -13,6 +15,12 @@ from configs.demo_scenes import build_demo_source_list, get_demo_scene
 ROOT = Path(__file__).resolve().parent
 ASSETS_DIR = ROOT / "assets"
 
+
+def parse_args():
+    
+    parser = argparse.ArgumentParser(description="Gravity-Lens Sim")
+
+    pass
 
 def generate_demo_sourcelist():
     return [
