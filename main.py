@@ -24,7 +24,7 @@ def parse_args():
     parser.add_argument("--mode", choices=["source_list", "image"], default=None)
 
     # Source list mode
-    parser.add_argument("--scene", choice=["simple","einstein_ring"], default=None)
+    parser.add_argument("--scene", choices=["simple","einstein_ring"], default=None)
 
     #pass
     return parser.parse_args()
@@ -128,16 +128,18 @@ def run_image_sim(config):
 
 
 if __name__ == "__main__":
-    
+
+    args = parse_args()
     app_config = AppConfig()
+    app_config = apply_parse_config(app_config, args)
 
     #app_config.simulation_mode = "source_list"
-    app_config.simulation_mode = "image"
+    #app_config.simulation_mode = "image"
 
     #app_config.source_list.scene_name = "einstein_ring"
-    app_config.source_list.scene_name = "simple"
-    app_config.image_lensing.image_filename = "el_gordo_james_webb.png"
-    app_config.image_lensing.theta_einstein = 0.9
+    #app_config.source_list.scene_name = "simple"
+    #app_config.image_lensing.image_filename = "el_gordo_james_webb.png"
+    #app_config.image_lensing.theta_einstein = 0.9
 
     if app_config.simulation_mode == "source_list":
          run_source_list_sim(app_config.source_list)
