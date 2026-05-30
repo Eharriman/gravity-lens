@@ -24,7 +24,7 @@ def parse_args():
     parser.add_argument("--mode", choices=["source_list", "image"], default=None)
 
     # Source list mode
-    parser.add_argument("--scene", choices=["simple","einstein_ring"], default=None)
+    parser.add_argument("--scene", choices=["simple","einstein_ring", "populated"], default=None)
     parser.add_argument("--n", type=int, default=None)
 
     # Image mode
