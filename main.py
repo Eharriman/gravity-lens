@@ -29,7 +29,7 @@ def parse_args():
 
     # Image mode
     parser.add_argument("--image", type=str, default=None)
-    parser.add_argument("--interp" choices=["nearest", "bilinear"], default=None)
+    parser.add_argument("--interp", choices=["nearest", "bilinear"], default=None)
     parser.add_argument("--grayscale", action="store_true")
     parser.add_argument("--mask-radius", type=float, default=None)
 
@@ -38,7 +38,6 @@ def parse_args():
     parser.add_argument("--theta-einstein", type=float, default=None)
     parser.add_argument("--show-jacobian", action="store_true")
 
-    
     #pass
     return parser.parse_args()
 
@@ -47,6 +46,9 @@ def apply_parse_config(config, args):
     
     if args.mode is not None:
         config.simulation_mode = args.mode
+
+    if args.scene is not None:
+        config.source_list.scene_name = args.scene
 
     return config
 
