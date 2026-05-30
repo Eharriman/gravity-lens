@@ -49,6 +49,8 @@ def apply_parse_config(config, args):
 
     if args.scene is not None:
         config.source_list.scene_name = args.scene
+    if args.n is not None:
+        config.source_list.n = args.n
 
     return config
 
