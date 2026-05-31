@@ -1,5 +1,6 @@
 import numpy as np
 from core.lens_mapping import generate_theta_grid, map_theta_to_beta
+from simulations.image_sampling import sample_bilinear, sample_nearest
 
 def generate_theta_grid_rect(theta_max, n_x, n_y):
     x = np.linspace(-theta_max, theta_max, n_x)
@@ -59,10 +60,25 @@ def lens_image(image, theta_max, theta_einstein, interpolation_mode="bilinear", 
     #px = np.clip(px, 0, n_x - 1)
     #py = np.clip(py, 0, n_y - 1)
 
-
+    if interpolation_mode == "nearest":
+        lensed = sample_nearest(image, px, py, fill_value=fill_value)
+    elif interpolation_mode == "bilinear":
+        lensed = sample_bilinear(image, px, py, fill_value=fill_value)
+    else:
+        raise ValueError(f"Unknown interpolation mode: {interpolation_mode}")
+    
+    '''
     if image.ndim == 2:
         lensed = image[py, px]
     else:
         lensed = image[py, px, :]
+    '''
 
+    lensed = apply_central_mask(
+        lensed=lensed,
+        theta_grid=theta_grid,
+        mask_radius=mask_radius,
+        fill_value=fill_value,
+    )
+    
     return lensed
