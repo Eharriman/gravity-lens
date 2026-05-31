@@ -52,6 +52,14 @@ def apply_parse_config(config, args):
     if args.n is not None:
         config.source_list.n = args.n
 
+    if args.theta_max is not None:
+        config.source_list.theta_max = args.theta_max
+        config.image_lensing.thteamax = args.theta_max
+
+    if args.theta_einstein is not None:
+        config.source_list.theta_einstein = args.theta_einstein
+        config.image_lensing.theta_einstein = args.theta_einstein
+
     return config
 
 def generate_demo_sourcelist():
