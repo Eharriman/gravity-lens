@@ -1,5 +1,31 @@
 import numpy as np
 
+def sample_nearest(image, px, py, fill_value=0.0):
+    image = np.asarray(image)
+    px = np.asarray(px, dtype=float)
+    py = np.asarray(py, dtype=float)
+
+    if image.ndim == 2:
+        h, w = image.shape
+        sampled = np.full(px.shape, fill_value, dtype=image.dtype)
+    elif image.ndim == 3:
+        h, w, channels = image.shape
+        sampled = np.full(px.shape + (channels,), fill_value, dtype=image.dtype)
+    else:
+        raise ValueError(f"Unsupported image shape: {image.shape}")
+
+    ix = np.rint(px).astype(int)
+    iy = np.rint(py).astype(int)
+
+    valid = (ix >= 0) & (ix < w) & (iy >= 0) & (iy < h)
+
+    if image.ndim == 2:
+        sampled[valid] = image[iy[valid], ix[valid]]
+    else:
+        sampled[valid] = image[iy[valid], ix[valid], :]
+
+    return sampled
+
 def sample_bilinear(image, px, py, fill_value=0.0):
 
     image = np.asarray(image)
