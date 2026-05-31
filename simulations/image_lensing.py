@@ -8,6 +8,30 @@ def generate_theta_grid_rect(theta_max, n_x, n_y):
     return np.stack((X, Y), axis=-1)
 
 
+def theta_to_pixel_coords(beta_grid, theta_max, n_x, n_y):
+    beta_x = beta_grid[..., 0]
+    beta_y = beta_grid[..., 1]
+
+    px = (beta_x + theta_max) / (2.0 * theta_max) * (n_x - 1)
+    py = (beta_y + theta_max) / (2.0 * theta_max) * (n_y - 1)
+
+    return px, py
+
+
+def apply_central_mask(lensed, theta_grid, mask_radius, fill_value=0.0):
+    if mask_radius is None or mask_radius <= 0:
+        return lensed
+
+    theta_x = theta_grid[..., 0]
+    theta_y = theta_grid[..., 1]
+    r2 = theta_x**2 + theta_y**2
+
+    mask = r2 < mask_radius**2
+    lensed[mask] = fill_value
+
+    return lensed
+
+
 def lens_image(image, theta_max, theta_einstein):
 
     if image.ndim == 2:
