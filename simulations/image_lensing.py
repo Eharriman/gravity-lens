@@ -1,6 +1,13 @@
 import numpy as np
 from core.lens_mapping import generate_theta_grid, map_theta_to_beta
 
+def generate_theta_grid_rect(theta_max, n_x, n_y):
+    x = np.linspace(-theta_max, theta_max, n_x)
+    y = np.linspace(-theta_max, theta_max, n_y)
+    X, Y = np.meshgrid(x, y, indexing="xy")
+    return np.stack((X, Y), axis=-1)
+
+
 def lens_image(image, theta_max, theta_einstein):
 
     if image.ndim == 2:
