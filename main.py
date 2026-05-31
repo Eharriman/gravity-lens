@@ -10,7 +10,7 @@ from simulations.image_lensing_interp import lens_image_interp
 from render.image_render import plot_image_comparison
 
 from configs.simulation_config import AppConfig, ASSETS_DIR
-from configs.demo_scenes import build_demo_source_list, get_demo_scene
+from configs.demo_scenes import build_demo_source_list, get_demo_scene, list_demo_scenes
 
 ROOT = Path(__file__).resolve().parent
 ASSETS_DIR = ROOT / "assets"
@@ -66,6 +66,10 @@ def apply_parse_config(config, args):
 
     if args.image is not None:
         config.image_lensing.image_filename = args.image
+
+    if args.list_scenes:
+        print_available_scenes()
+        raise SystemExit
 
     return config
 
@@ -158,6 +162,11 @@ def run_image_sim(config):
 
     plot_image_comparison(image, lensed, config.save_output, config.tag)
 
+
+def print_available_scenes():
+    print("Available source-list scenes:")
+    for scene in list_demo_scenes():
+        print(f" {scene}")
 
 if __name__ == "__main__":
 
