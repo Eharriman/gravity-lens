@@ -38,6 +38,10 @@ def parse_args():
     parser.add_argument("--theta-einstein", type=float, default=None)
     parser.add_argument("--show-jacobian", action="store_true")
 
+    # Helper/User commands
+    parser.add_argument("--list-scenes", action="store_true")
+    parser.add_argument("--list-modes", action="store_true")
+                        
     #pass
     return parser.parse_args()
 
@@ -59,6 +63,9 @@ def apply_parse_config(config, args):
     if args.theta_einstein is not None:
         config.source_list.theta_einstein = args.theta_einstein
         config.image_lensing.theta_einstein = args.theta_einstein
+
+    if args.image is not None:
+        config.image_lensing.image_filename = args.image
 
     return config
 

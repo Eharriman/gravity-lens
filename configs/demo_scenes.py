@@ -44,7 +44,6 @@ def build_einstein_ring_source():
     ]
 
 
-
 def build_populated_source_list():
     return [
         {"type": "gaussian_circular", "center": (0.6, 0.2), "sigma": 0.05, "amplitude": 1.5},
@@ -77,6 +76,7 @@ def build_populated_source_list():
         {"type": "sersic_source", "center": (-1.4, -1.3), "R_eff": 0.12, "n_sersic": 1.3, "amplitude": 0.9},
     ]
 
+
 def get_demo_scene(scene_name):
     
     scenes = {
@@ -89,3 +89,6 @@ def get_demo_scene(scene_name):
         raise ValueError(f"Unknown scene selection: {scene_name}")
     
     return scenes[scene_name]()
+
+def list_demo_scenes():
+    return["simple","einstein_ring","populated"]
