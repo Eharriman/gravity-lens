@@ -32,7 +32,7 @@ def apply_central_mask(lensed, theta_grid, mask_radius, fill_value=0.0):
     return lensed
 
 
-def lens_image(image, theta_max, theta_einstein):
+def lens_image(image, theta_max, theta_einstein, interpolation_mode="bilinear", fill_value=0.0, mask_radius=None):
 
     if image.ndim == 2:
         n_y, n_x = image.shape
@@ -43,21 +43,22 @@ def lens_image(image, theta_max, theta_einstein):
         raise ValueError(f"Unsupported image shape: {image.shape}")
 
     theta_grid = generate_theta_grid(theta_max, n_x)
-
     beta_grid = map_theta_to_beta(theta_grid, theta_einstein)
+    px, py = theta_to_pixel_coords(beta_grid, theta_max, n_x, n_y)
 
-    beta_x = beta_grid[..., 0]
-    beta_y = beta_grid[..., 1]
+    #beta_x = beta_grid[..., 0]
+    #beta_y = beta_grid[..., 1]
 
-    beta_x_norm = (beta_x + theta_max) / (2 * theta_max)
-    beta_y_norm = (beta_y + theta_max) / (2 * theta_max)
+    #beta_x_norm = (beta_x + theta_max) / (2 * theta_max)
+    #beta_y_norm = (beta_y + theta_max) / (2 * theta_max)
 
     
-    px = (beta_x_norm * (n_x - 1)).astype(int)
-    py = (beta_y_norm * (n_y - 1)).astype(int)
+    #px = (beta_x_norm * (n_x - 1)).astype(int)
+    #py = (beta_y_norm * (n_y - 1)).astype(int)
 
-    px = np.clip(px, 0, n_x - 1)
-    py = np.clip(py, 0, n_y - 1)
+    #px = np.clip(px, 0, n_x - 1)
+    #py = np.clip(py, 0, n_y - 1)
+
 
     if image.ndim == 2:
         lensed = image[py, px]
