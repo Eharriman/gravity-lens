@@ -1,12 +1,14 @@
 import argparse
 
 from pathlib import Path
-from simulations.field_lensing import generate_lensed_field
+
 from render.field_render import plot_lensed_comparison, plot_magnification_and_det
 
 from ingest.image_ingest import load_image
+
+from simulations.field_lensing import generate_lensed_field
 from simulations.image_lensing import lens_image
-from simulations.image_lensing_interp import lens_image_interp
+#from simulations.image_lensing_interp import lens_image_interp
 from render.image_render import plot_image_comparison
 
 from configs.simulation_config import AppConfig, ASSETS_DIR
@@ -58,7 +60,7 @@ def apply_parse_config(config, args):
 
     if args.theta_max is not None:
         config.source_list.theta_max = args.theta_max
-        config.image_lensing.thteamax = args.theta_max
+        config.image_lensing.thetamax = args.theta_max
 
     if args.theta_einstein is not None:
         config.source_list.theta_einstein = args.theta_einstein
@@ -103,6 +105,7 @@ def run_image_sim(config):
     image_path = ASSETS_DIR / config.image_filename
     image = load_image(image_path, grayscale=config.grayscale)
 
+    '''
     if config.interpolation_mode == "nearest":
         lensed = lens_image(
             image=image,
@@ -121,7 +124,15 @@ def run_image_sim(config):
 
     else:
         raise ValueError(f"Unknown interpolation mode: {config.interpolation_mode}")
-
+    '''
+    lensed = lens_image(
+    image=image,
+    theta_max=config.theta_max,
+    theta_einstein=config.theta_einstein,
+    interpolation_mode=config.interpolation_mode,
+    fill_value=config.fill_value,
+    mask_radius=config.mask_radius,
+    )
 
     plot_image_comparison(image, lensed, config.save_output, config.tag)
 
