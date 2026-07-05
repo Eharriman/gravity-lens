@@ -26,6 +26,7 @@ def sample_nearest(image, px, py, fill_value=0.0):
 
     return sampled
 
+
 def sample_bilinear(image, px, py, fill_value=0.0):
 
     image = np.asarray(image)
