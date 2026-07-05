@@ -8,11 +8,13 @@ from ingest.image_ingest import load_image
 
 from simulations.field_lensing import generate_lensed_field
 from simulations.image_lensing import lens_image
-#from simulations.image_lensing_interp import lens_image_interp
 from render.image_render import plot_image_comparison
 
 from configs.simulation_config import AppConfig, ASSETS_DIR
 from configs.demo_scenes import build_demo_source_list, get_demo_scene, list_demo_scenes
+
+from cli.commands import print_available_scenes
+from cli.parser import parse_args
 
 ROOT = Path(__file__).resolve().parent
 ASSETS_DIR = ROOT / "assets"
@@ -105,26 +107,6 @@ def run_image_sim(config):
     image_path = ASSETS_DIR / config.image_filename
     image = load_image(image_path, grayscale=config.grayscale)
 
-    '''
-    if config.interpolation_mode == "nearest":
-        lensed = lens_image(
-            image=image,
-            theta_max=config.theta_max,
-            theta_einstein=config.theta_einstein,
-        )
-
-    elif config.interpolation_mode == "bilinear":
-        lensed = lens_image_interp(
-            image=image,
-            theta_max=config.theta_max,
-            theta_einstein=config.theta_einstein,
-            fill_value=config.fill_value,
-            mask_radius=config.mask_radius,
-        )
-
-    else:
-        raise ValueError(f"Unknown interpolation mode: {config.interpolation_mode}")
-    '''
     lensed = lens_image(
     image=image,
     theta_max=config.theta_max,
