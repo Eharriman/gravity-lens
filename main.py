@@ -19,7 +19,7 @@ from cli.parser import parse_args
 ROOT = Path(__file__).resolve().parent
 ASSETS_DIR = ROOT / "assets"
 
-
+'''
 def parse_args():
     
     parser = argparse.ArgumentParser(description="Gravity-Lens Sim")
@@ -48,21 +48,26 @@ def parse_args():
                         
     #pass
     return parser.parse_args()
-
+'''
 
 def apply_parse_config(config, args):
     
+    if args.list_scenes:
+        print_available_scenes()
+        raise SystemExit
+
     if args.mode is not None:
         config.simulation_mode = args.mode
 
     if args.scene is not None:
         config.source_list.scene_name = args.scene
+
     if args.n is not None:
         config.source_list.n = args.n
 
     if args.theta_max is not None:
         config.source_list.theta_max = args.theta_max
-        config.image_lensing.thetamax = args.theta_max
+        config.image_lensing.theta_max = args.theta_max
 
     if args.theta_einstein is not None:
         config.source_list.theta_einstein = args.theta_einstein
@@ -71,9 +76,17 @@ def apply_parse_config(config, args):
     if args.image is not None:
         config.image_lensing.image_filename = args.image
 
-    if args.list_scenes:
-        print_available_scenes()
-        raise SystemExit
+    if args.interp is not None:
+        config.image_lensing.interpolation_mode = args.interp
+
+    if args.grayscale:
+        config.image_lensing.grayscale = True
+
+    if args.mask_radius is not None:
+        config.image_lensing.mask_radius = args.mask_radius
+
+    if args.show_jacobian:
+        config.source_list.show_jacobian = True
 
     return config
 
@@ -118,11 +131,13 @@ def run_image_sim(config):
 
     plot_image_comparison(image, lensed, config.save_output, config.tag)
 
-
+'''
 def print_available_scenes():
     print("Available source-list scenes:")
     for scene in list_demo_scenes():
         print(f" {scene}")
+'''
+
 
 if __name__ == "__main__":
 
