@@ -19,37 +19,6 @@ from cli.parser import parse_args
 ROOT = Path(__file__).resolve().parent
 ASSETS_DIR = ROOT / "assets"
 
-'''
-def parse_args():
-    
-    parser = argparse.ArgumentParser(description="Gravity-Lens Sim")
-
-    # Mode config
-    parser.add_argument("--mode", choices=["source_list", "image"], default=None)
-
-    # Source list mode
-    parser.add_argument("--scene", choices=["simple","einstein_ring", "populated"], default=None)
-    parser.add_argument("--n", type=int, default=None)
-
-    # Image mode
-    parser.add_argument("--image", type=str, default=None)
-    parser.add_argument("--interp", choices=["nearest", "bilinear"], default=None)
-    parser.add_argument("--grayscale", action="store_true")
-    parser.add_argument("--mask-radius", type=float, default=None)
-
-    # Additional
-    parser.add_argument("--theta-max", type=float, default=None)
-    parser.add_argument("--theta-einstein", type=float, default=None)
-    parser.add_argument("--show-jacobian", action="store_true")
-
-    # Helper/User commands
-    parser.add_argument("--list-scenes", action="store_true")
-    parser.add_argument("--list-modes", action="store_true")
-                        
-    #pass
-    return parser.parse_args()
-'''
-
 def apply_parse_config(config, args):
     
     if args.list_scenes:
@@ -92,7 +61,6 @@ def apply_parse_config(config, args):
 
 
 def run_source_list_sim(config):
-    #source_list = build_demo_source_list()
     source_list = get_demo_scene(config.scene_name)
 
     result = generate_lensed_field(
@@ -131,31 +99,11 @@ def run_image_sim(config):
 
     plot_image_comparison(image, lensed, config.save_output, config.tag)
 
-'''
-def print_available_scenes():
-    print("Available source-list scenes:")
-    for scene in list_demo_scenes():
-        print(f" {scene}")
-'''
-
-
 if __name__ == "__main__":
 
     args = parse_args()
     app_config = AppConfig()
     app_config = apply_parse_config(app_config, args)
-
-    #app_config.simulation_mode = "source_list"
-    #app_config.simulation_mode = "image"
-
-    #app_config.source_list.scene_name = "einstein_ring"
-    #app_config.source_list.scene_name = "simple"
-    #app_config.image_lensing.image_filename = "el_gordo_james_webb.png"
-    #app_config.image_lensing.theta_einstein = 0.9
-
-    '''
-    Running: python .\main.py --mode source_list --scene simple    
-    '''
 
     if app_config.simulation_mode == "source_list":
          run_source_list_sim(app_config.source_list)
