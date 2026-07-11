@@ -1,7 +1,11 @@
+from collections.abc import Callable
+
 import numpy as np
 from core.deflection import point_lens_deflection
 
-def map_theta_to_beta(theta_vec, theta_einstein):
+DeflectionFunction = Callable[[np.ndarray], np.ndarray]
+
+def map_theta_to_beta(theta, deflection_function):
     '''
     Method is used to return the source image vector from a given observation angular vector and Einstein Angle.
     A theta vector, the observed location of the image, is provided along with the Einstein angle. 
@@ -9,13 +13,19 @@ def map_theta_to_beta(theta_vec, theta_einstein):
     The beta vector is the difference between the theta vector and the deflection angle
     '''
 
-    theta_vec = np.asarray(theta_vec, dtype=float)
-    
-    alpha = point_lens_deflection(theta_vec, theta_einstein)
+    theta = np.asarray(theta, dtype=float)
+    alpha = np.asarray(deflection_function(theta), dtype=float)
 
-    beta = theta_vec - alpha
+    if alpha.shape != theta.shape:
+        raise ValueError(
+            "Deflection output and theta shape must be the same."  
+        )
 
-    return beta
+    #theta_vec = np.asarray(theta_vec, dtype=float)
+    #alpha = point_lens_deflection(theta_vec, theta_einstein)
+    #beta = theta_vec - alpha
+
+    return theta - alpha
 
 
 def generate_theta_grid(theta_max, n):
