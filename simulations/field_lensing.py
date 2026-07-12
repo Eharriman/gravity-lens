@@ -29,9 +29,9 @@ def generate_lensed_field(theta_max, n, theta_einstein,
     lensed_image = source_field(beta_grid, source_list)
 
     # Equivalent formulation using Jacobian derivation
-    det_jacobian = point_lens_det_jacobian(theta_grid, theta_einstein)
-    magnification = point_lens_magnification_field(theta_grid, theta_einstein)
-    lambda_r, lambda_t = point_lens_eigenvalues(theta_grid, theta_einstein)
+    det_jacobian = determinant(theta_grid, theta_einstein)
+    magnification = magnification(theta_grid, theta_einstein)
+    lambda_r, lambda_t = eigenvalues(theta_grid, theta_einstein)
 
     return {
         "theta_grid": theta_grid,
