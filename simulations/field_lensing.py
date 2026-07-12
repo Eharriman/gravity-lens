@@ -21,6 +21,8 @@ def generate_lensed_field(theta_max, n, theta_einstein,
     
     theta_grid = generate_theta_grid(theta_max, n)
     beta_grid = map_theta_to_beta(theta_grid, theta_einstein)
+
+    deflection_function = partial(deflection, theta_einstein=theta_einstein)
     
     unlensed_image = source_field(theta_grid, source_list)
     
