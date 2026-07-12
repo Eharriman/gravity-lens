@@ -4,9 +4,10 @@ from functools import partial
 from core.lens_mapping import generate_theta_grid, map_theta_to_beta
 from lenses.point_mass import (
     deflection,
+    jacobian,
     determinant,
-    eigenvalues,
-    magnification
+    magnification,
+    eigenvalues
 )
 
 from core.jacobian import (
@@ -20,9 +21,8 @@ def generate_lensed_field(theta_max, n, theta_einstein,
                            source_list):
     
     theta_grid = generate_theta_grid(theta_max, n)
-    beta_grid = map_theta_to_beta(theta_grid, theta_einstein)
-
     deflection_function = partial(deflection, theta_einstein=theta_einstein)
+    beta_grid = map_theta_to_beta(theta_grid, deflection_function)
     
     unlensed_image = source_field(theta_grid, source_list)
     
@@ -30,7 +30,7 @@ def generate_lensed_field(theta_max, n, theta_einstein,
 
     # Equivalent formulation using Jacobian derivation
     det_jacobian = determinant(theta_grid, theta_einstein)
-    magnification = magnification(theta_grid, theta_einstein)
+    mag = magnification(theta_grid, theta_einstein)
     lambda_r, lambda_t = eigenvalues(theta_grid, theta_einstein)
 
     return {
@@ -39,7 +39,7 @@ def generate_lensed_field(theta_max, n, theta_einstein,
         "unlensed_image": unlensed_image,
         "lensed_image": lensed_image,
         "det_jacobian": det_jacobian,
-        "magnification": magnification,
+        "magnification": mag,
         "lambda_r": lambda_r,
         "lambda_t": lambda_t,
     }
