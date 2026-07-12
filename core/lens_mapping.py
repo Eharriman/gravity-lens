@@ -28,6 +28,8 @@ def map_theta_to_beta(theta, deflection_function):
     return theta - alpha
 
 
+'''
+
 def generate_theta_grid(theta_max, n):
     x = np.linspace(-theta_max, theta_max, n)
     y = np.linspace(-theta_max, theta_max, n)
@@ -35,5 +37,20 @@ def generate_theta_grid(theta_max, n):
 
     X, Y = np.meshgrid(x, y, indexing="xy")
     return np.stack((X,Y), axis=-1)
+
+'''
+
+def generate_theta_grid(theta_max, n):
+    if theta_max <= 0:
+        raise ValueError("theta_max must be a positive number.")
+    
+    if n < 2:
+        raise ValueError("n must be greater than 2")
+    
+    axis = np.linspace(-theta_max, theta_max, n)
+
+    theta_x, theta_y = np.meshgrid(axis, axis, indexing='xy')
+
+    return np.stack((theta_x, theta_y), axis =-1)
 
 #print(generate_theta_grid(1, 3))
