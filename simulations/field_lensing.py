@@ -1,5 +1,14 @@
 import numpy as np
+from functools import partial
+
 from core.lens_mapping import generate_theta_grid, map_theta_to_beta
+from lenses.point_mass import (
+    deflection,
+    determinant,
+    eigenvalues,
+    magnification
+)
+
 from core.jacobian import (
     point_lens_det_jacobian,
     point_lens_magnification_field,
