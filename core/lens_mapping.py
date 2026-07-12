@@ -14,7 +14,7 @@ def map_theta_to_beta(theta, deflection_function):
     '''
 
     theta = np.asarray(theta, dtype=float)
-    alpha = np.asarray(deflection_function(theta), dtype=float)
+    alpha = np.asarray(deflection_function(theta), dtype=float )
 
     if alpha.shape != theta.shape:
         raise ValueError(
