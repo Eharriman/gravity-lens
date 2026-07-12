@@ -2,6 +2,11 @@ import numpy as np
 from core.lens_mapping import generate_theta_grid, map_theta_to_beta
 from simulations.image_sampling import sample_bilinear, sample_nearest
 
+from functools import partial
+
+from core.lens_mapping import map_theta_to_beta
+from lenses.point_mass import deflection
+
 def generate_theta_grid_rect(theta_max, n_x, n_y):
     x = np.linspace(-theta_max, theta_max, n_x)
     y = np.linspace(-theta_max, theta_max, n_y)
@@ -44,7 +49,18 @@ def lens_image(image, theta_max, theta_einstein, interpolation_mode="bilinear", 
         raise ValueError(f"Unsupported image shape: {image.shape}")
 
     theta_grid = generate_theta_grid(theta_max, n_x)
-    beta_grid = map_theta_to_beta(theta_grid, theta_einstein)
+    #beta_grid = map_theta_to_beta(theta_grid, theta_einstein)
+    
+    deflection_function = partial(
+        deflection,
+        theta_einstein=theta_einstein
+    )
+
+    beta_grid = map_theta_to_beta(
+        theta_grid,
+        deflection_function
+    )
+
     px, py = theta_to_pixel_coords(beta_grid, theta_max, n_x, n_y)
 
     #beta_x = beta_grid[..., 0]
